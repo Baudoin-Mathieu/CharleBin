@@ -29,27 +29,40 @@ class Filter
      *
      * @access public
      * @static
-     * @param  string $time
+     * @param int $value
+     * @param string unit
      * @throws Exception
      * @return string
      */
-    public static function formatHumanReadableTime($time)
+    public static function formatHumanReadableTime($value, $unit = 's')
     {
-        if (preg_match('/^(\d+) *(\w+)$/', $time, $matches) !== 1) {
-            throw new Exception("Error parsing time format '$time'", 30);
+        if (!is_numeric($value)) {
+            throw new Exception('Invalid time value');
         }
-        switch ($matches[2]) {
-            case 'sec':
-                $unit = 'second';
-                break;
-            case 'min':
-                $unit = 'minute';
-                break;
-            default:
-                $unit = rtrim($matches[2], 's');
+        if ($unit === 's') {
+            $unit = I18n::_('seconds');
+        } elseif ($unit === 'm') {
+            $unit = I18n::_('minutes');
+            $value /= 60;
+        } elseif ($unit === 'h') {
+            $unit = I18n::_('hours');
+            $value /= 3600;
+        } elseif ($unit === 'd') {
+            $unit = I18n::_('days');
+            $value /= 86400;
+        } elseif ($unit === 'w') {
+            $unit = I18n::_('weeks');
+            $value /= 604800;
+        } elseif ($unit === 'M') {
+            $unit = I18n::_('months');
+            $value /= 2628000;
+        } elseif ($unit === 'y') {
+            $unit = I18n::_('years');
+            $value /= 31536000;
         }
-        return I18n::_(array('%d ' . $unit, '%d ' . $unit . 's'), (int) $matches[1]);
+        return number_format($value, 0, '.', ' ') . ' ' . $unit;
     }
+    
 
     /**
      * format a given number of bytes in IEC 80000-13:2008 notation (localized)

@@ -31,4 +31,4 @@ jobs:
           # Optional: Ignore warnings
           php_codesniffer_args: "-n"
           php_codesniffer_auto_fix: true
-        continue_on_error: false
+          continue_on_error: false
