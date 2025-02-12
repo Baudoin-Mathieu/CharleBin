@@ -32,3 +32,15 @@ jobs:
           php_codesniffer_args: "-n"
           php_codesniffer_auto_fix: true
           continue-on-error: false
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          build: npm run build
+          start: npm start
