@@ -33,7 +33,6 @@ jobs:
           php_codesniffer_auto_fix: true
           continue-on-error: false
 
-jobs:
   cypress-run:
     runs-on: ubuntu-24.04
     steps:
