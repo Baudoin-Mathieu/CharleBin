@@ -12,3 +12,5 @@ lint:
 	find . -type f -name '*.php' -not -path "./vendor/*" -exec php -l {} \;
 	./vendor/bin/phpcs --extensions=php ./lib/;
 	./vendor/bin/phpmd ./lib/ --ignore-errors-on-exit --ignore-violations-on-exit ansi codesize,unusedcode,naming;
+dev:
+	php -dxdebug.mode=debug -dxdebug.start_with_request=yes -S localhost:8080
