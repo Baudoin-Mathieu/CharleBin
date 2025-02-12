@@ -48,5 +48,5 @@ jobs:
         run: composer install
 
       - name: Run Cypress tests
-        run: npx cypress run
+        run: make start && npx cypress run
 
