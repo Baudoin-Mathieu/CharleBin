@@ -34,10 +34,19 @@ jobs:
           continue-on-error: false
 
   cypress-run:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: cypress-io/github-action@v6
-      - uses: php-actions/composer@v6
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
-          command: npx cypress run
-          browser: chrome
+          node-version: '14'
+
+      - name: Install dependencies
+        run: composer install
+
+      - name: Run Cypress tests
+        run: npx cypress run
+
