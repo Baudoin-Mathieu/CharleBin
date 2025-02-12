@@ -47,6 +47,9 @@ jobs:
       - name: Install dependencies
         run: composer install
 
-      - name: Run Cypress tests
-        run: make start && npx cypress run
+      - name: run server
+        run: make start
+        
+      - name: run cypress test
+        run: npx cypress run
 
